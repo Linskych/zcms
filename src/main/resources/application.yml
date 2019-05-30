@@ -1,0 +1,70 @@
+server:
+  port: 8080
+  connection-timeout: 30000
+  tomcat:
+    accept-count: 100 #default 达到最大连接数后的排队请求数量
+    max-connections: 10000 #default 最大连接数
+    max-threads: 200 #default 最大线程
+    min-spare-threads: 10 #default 空闲线程
+    uri-encoding: UTF-8
+  
+  
+spring:
+  profiles:
+    active: dev
+  application:
+    name: zcms
+    
+  thymeleaf:
+    cache: false
+    encoding: UTF-8
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://127.0.0.1:3306/skych?characterEncoding=UTF-8&useUnicode=true&useSSL=false
+    #username: root
+    #password: root123
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 30000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 28800000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    filters: stat,wall,log4j2
+    logSlowSql: true
+    
+mybatis:
+  type-aliases-package: com.iotzc.zcms.model
+  mapper-locations: classpath:com/iotzc/zcms/dao/*.xml
+  
+#  config-location: classpath:mybatis-config.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+    
+  
+  
+
+---
+spring:
+  profiles: dev
+  
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/skych?characterEncoding=UTF-8&useUnicode=true&useSSL=false
+    username: root
+    password: root123
+  
+---
+spring:
+  profiles: test
+  
+---
+spring:
+  profiles: prd
