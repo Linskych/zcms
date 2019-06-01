@@ -3,10 +3,10 @@
 <generatorConfiguration>
 
   <!-- 需要指定实际的connector位置 -->
-  <classPathEntry location="F:\apache-maven-repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.12.jar"/>
+  <classPathEntry location="F:\apache-maven-repository\mysql\mysql-connector-java\8.0.15\mysql-connector-java-8.0.15.jar"/>
   
   <!-- <context id="MySqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat"> -->
-  <context id="MySqlContext" targetRuntime="com.skych.fullsystem.mybatis.SkychMyBatis3SimpleImpl" defaultModelType="flat">
+  <context id="MySqlContext" targetRuntime="com.iotzc.zcms.skych.SkychMyBatis3SimpleImpl" defaultModelType="flat">
     <!-- <connectionFactory/> -->
     
     <property name="beginningDelimiter" value="`"/>
@@ -18,8 +18,8 @@
     </commentGenerator>
     
     <jdbcConnection
-        driverClass="com.mysql.jdbc.Driver"
-        connectionURL="jdbc:mysql://127.0.0.1:3306/skych?nullCatalogMeansCurrent=true"
+        driverClass="com.mysql.cj.jdbc.Driver"
+        connectionURL="jdbc:mysql://127.0.0.1:3306/czc?nullCatalogMeansCurrent=true&amp;serverTimezone=UTC"
         userId="root"
         password="root123"/>
     
@@ -30,7 +30,7 @@
         <property name="trimStrings" value="true"/>
     </javaModelGenerator>
     
-    <sqlMapGenerator targetPackage="com.iotzc.zcms.skych.generator.dao" targetProject="zcns\src\main\resources"/>
+    <sqlMapGenerator targetPackage="com.iotzc.zcms.skych.generator.dao" targetProject="zcms\src\main\resources"/>
     
     <javaClientGenerator targetPackage="com.iotzc.zcms.skych.generator.dao" type="XMLMAPPER" targetProject="zcms\src\main\java"/>
     
