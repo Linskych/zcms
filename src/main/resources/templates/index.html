@@ -88,10 +88,11 @@
       </div>
       
       <!-- 侧边菜单 -->
+      
       <div class="layui-side layui-side-menu">
         <div class="layui-side-scroll">
           <div class="layui-logo" lay-href="home/console.html">
-            <span>layuiAdmin</span>
+            <span>skych</span>
           </div>
           
           <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
@@ -460,7 +461,7 @@
       <!-- 主体内容 -->
       <div class="layui-body" id="LAY_app_body">
         <div class="layadmin-tabsbody-item layui-show">
-          <iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+          <!-- <iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe> -->
         </div>
       </div>
       
@@ -469,7 +470,7 @@
     </div>
   </div>
 
-  <script src="@{/layuiadmin/layui/layui.js}"></script>
+  <script th:src="@{/layuiadmin/layui/layui.js}"></script>
   <script>
   layui.config({
     base: '../layuiadmin/' //静态资源所在路径

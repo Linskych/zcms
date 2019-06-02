@@ -18,6 +18,10 @@ spring:
   thymeleaf:
     cache: false
     encoding: UTF-8
+    
+#  mvc:
+#    static-path-pattern: /static/**
+  
 
 
   datasource:
@@ -31,7 +35,6 @@ spring:
     maxActive: 20
     maxWait: 30000
     timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 28800000
     validationQuery: SELECT 1 FROM DUAL
     testWhileIdle: true
     testOnBorrow: false
@@ -46,6 +49,7 @@ mybatis:
 #  config-location: classpath:mybatis-config.xml
   configuration:
     log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+    #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
     use-generated-keys: true
     
@@ -57,10 +61,22 @@ spring:
   profiles: dev
   
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/skych?characterEncoding=UTF-8&useUnicode=true&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/czc?characterEncoding=UTF-8&useUnicode=true&useSSL=false&serverTimezone=UTC
     username: root
     password: root123
   
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout:
+      seconds: 2
+    database: 0
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 8
+        min-idle: 4
+        
 ---
 spring:
   profiles: test
@@ -68,3 +84,4 @@ spring:
 ---
 spring:
   profiles: prd
+  
