@@ -21,7 +21,7 @@ public class ShiroConfiguration {
     public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(securityManager);
-        bean.setLoginUrl("/user/login");
+        bean.setLoginUrl("/login");
         bean.setSuccessUrl("index");
         bean.setUnauthorizedUrl("/403");
         
@@ -30,8 +30,9 @@ public class ShiroConfiguration {
         filterChainMap.put("/js/**", "anon");
         filterChainMap.put("/layuiadmin/**", "anon");
         filterChainMap.put("/views/**", "anon");
+        filterChainMap.put("/getCaptcha", "anon");
+        filterChainMap.put("/user/check", "anon");
         filterChainMap.put("/logout", "logout");
-        filterChainMap.put("/user/test", "authc");
         filterChainMap.put("/**", "authc");
         
         bean.setFilterChainDefinitionMap(filterChainMap);
@@ -51,7 +52,7 @@ public class ShiroConfiguration {
         UserRealm realm = new UserRealm();
         HashedCredentialsMatcher matcher =  new HashedCredentialsMatcher();
         matcher.setHashAlgorithmName(Md5Hash.ALGORITHM_NAME);
-        matcher.setHashIterations(1024);
+        matcher.setHashIterations(2);
         realm.setCredentialsMatcher(matcher);
         
         return realm;

@@ -24,8 +24,22 @@ public class Encoder {
         return encodeMsg;
     }
     
+    public static String sha1(String str) {
+        MessageDigest digest = null;
+        try {
+            digest = MessageDigest.getInstance("SHA-1");
+        } catch (NoSuchAlgorithmException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        digest.update(str.getBytes());
+        byte[] messageDigest = digest.digest();
+
+        return byte2Hex(messageDigest);
+    }
+    
     // 下面的方法是javax.xml.bind.DatatypeConverter.printHexBinary(byte[] data)的内部实现
-    private static final char[] hexCode = "0123456789ABCDEF".toCharArray();
+    private static final char[] hexCode = "0123456789abcdef".toCharArray();
     private static String byte2Hex(byte[] data) {
         StringBuilder r = new StringBuilder(data.length * 2);
         for (byte b : data) {

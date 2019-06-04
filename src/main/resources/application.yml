@@ -41,7 +41,31 @@ spring:
     testOnReturn: false
     filters: stat,wall,log4j2
     logSlowSql: true
-    
+  
+  redis:
+    timeout:
+      seconds: 2
+    database: 0
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 8
+        min-idle: 4
+  
+  
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      fail-on-empty-beans: false
+      indent-output: true
+    default-property-inclusion: non-null #null不序列化
+    deserialization:
+      fail-on-unknown-properties: false
+    parser:
+      allow-unquoted-control-chars: true
+      allow-single-quotes: true
+
+
 mybatis:
   type-aliases-package: com.iotzc.zcms.model
   mapper-locations: classpath:com/iotzc/zcms/dao/*.xml
@@ -68,15 +92,8 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
-    timeout:
-      seconds: 2
-    database: 0
-    jedis:
-      pool:
-        max-active: 10
-        max-idle: 8
-        min-idle: 4
-        
+
+
 ---
 spring:
   profiles: test
