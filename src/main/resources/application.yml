@@ -7,7 +7,8 @@ server:
     max-threads: 200 #default 最大线程
     min-spare-threads: 10 #default 空闲线程
     uri-encoding: UTF-8
-  
+logging:
+  config: classpath:log4j2.yml
   
 spring:
   profiles:

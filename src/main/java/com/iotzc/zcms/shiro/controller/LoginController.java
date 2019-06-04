@@ -16,19 +16,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.iotzc.zcms.util.CaptchaGenerator;
 import com.iotzc.zcms.util.Result;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class LoginController {
 
     private final static String KEY_CAPTCHA = "CAPTCHA";
     
     @RequestMapping("/login")
     public String toLoginPage() {
-        System.out.println("page.......");
+        log.info("page.......");
         return "login";
     }
     
     @RequestMapping("/check")
     public String login(HttpServletRequest request) {
+        log.info("check.....");
         String phone = request.getParameter("phone");
         String pwd = request.getParameter("password");
         String captcha = request.getParameter("captcha");
@@ -41,6 +45,7 @@ public class LoginController {
     
     @RequestMapping("/getCaptcha")
     public void getCaptcha(HttpServletRequest request, HttpServletResponse response) {
+        log.info("getCaptcha:{}", "request");
         response.setContentType("image/jpeg");
         response.setHeader("Pragma", "No-cache");
         response.setHeader("Cache-Control", "no-cache");

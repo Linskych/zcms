@@ -31,7 +31,10 @@ public class ShiroConfiguration {
         filterChainMap.put("/layuiadmin/**", "anon");
         filterChainMap.put("/views/**", "anon");
         filterChainMap.put("/getCaptcha", "anon");
-        filterChainMap.put("/user/check", "anon");
+        filterChainMap.put("/favicon.ico", "anon");
+        filterChainMap.put("/check", "anon");
+        filterChainMap.put("/api/**", "anon"); //客户端接口，需要token
+        filterChainMap.put("/server/**", "anon"); //服务器接口，需要鉴权
         filterChainMap.put("/logout", "logout");
         filterChainMap.put("/**", "authc");
         
