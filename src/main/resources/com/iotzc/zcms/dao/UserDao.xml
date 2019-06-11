@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
@@ -15,7 +15,7 @@
   <sql id="columns">
     u.nick_name,
     u.real_name,
-    u.phone, 
+    u.user_name, 
     u.password,
     u.salt,
     u.open_id,
@@ -28,15 +28,15 @@
         status = 1
     <where>
         <choose>
-            <when test="id == null and phone == null and openid == null">
+            <when test="id == null and userName == null and openid == null">
                 id = 0
             </when>
             <otherwise>
                 <if test="id != null">
                     and id = #{id}
                 </if>
-                <if test="phone != null and phone.trim() != ''">
-                    and phone = #{phone}
+                <if test="userName != null and userName.trim() != ''">
+                    and user_name = #{userName}
                 </if>
                 <if test="openId != null and openId.trim() != ''">
                     and open_id = #{openId}
@@ -58,7 +58,7 @@
         <if test="realName != null and realName.trim() != ''">
             real_name,
         </if>
-        phone,
+        user_name,
         <if test="password != null and password.trim() != ''">
             password,
         </if>
@@ -78,7 +78,7 @@
         <if test="realName != null and realName.trim() != ''">
             #{realName},
         </if>
-        #{phone},
+        #{userName},
         <if test="password != null and password.trim() != ''">
             #{password},
         </if>
@@ -97,7 +97,7 @@
     set
         nick_name = #{nickName},
         real_name = #{realName},
-        phone = #{phone},
+        user_name = #{userName},
         password = #{password},
         salt = #{salt},
         open_id = #{openId},
@@ -111,7 +111,7 @@
         id,
         nick_name,
         real_name,
-        phone,
+        user_name,
         password,
         salt,
         open_id,
@@ -122,8 +122,8 @@
         <if test="id != null">
             and id = #{id}
         </if>
-        <if test="phone != null and phone.trim() != ''">
-            and phone = #{phone}
+        <if test="userName != null and userName.trim() != ''">
+            and user_name = #{userName}
         </if>
         <if test="openId != null and openId.trim() != ''">
             and open_id = #{openId}
@@ -136,7 +136,7 @@
         id,
         nick_name,
         real_name,
-        phone,
+        user_name,
         password,
         salt,
         open_id,
@@ -147,8 +147,8 @@
         <if test="id != null">
             and id = #{id}
         </if>
-        <if test="phone != null and phone.trim() != ''">
-            and phone = #{phone}
+        <if test="userName != null and userName.trim() != ''">
+            and user_name = #{userName}
         </if>
         <if test="openId != null and openId.trim() != ''">
             and open_id = #{openId}

@@ -22,9 +22,9 @@ public class User {
      */
     private String realName;
     /**
-     * desc: 电话号码 column: phone
+     * desc: 账号(电话号码) column: user_name
      */
-    private String phone;
+    private String userName;
     /**
      * desc: 密码 column: password
      */
@@ -41,5 +41,9 @@ public class User {
      * desc: 用户状态，0正常，1失效 column: status
      */
     private Integer status;
+    
+    public String getCredentialsSalt() {
+        return userName + salt;
+    }
 
 }

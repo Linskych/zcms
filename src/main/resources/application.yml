@@ -94,12 +94,21 @@ spring:
     host: 127.0.0.1
     port: 6379
 
-
+  zcms:
+    common:
+      redis-prefix: CZC_
 ---
 spring:
   profiles: test
   
+  zcms:
+    common:
+      redis-prefix: CZC_
 ---
 spring:
   profiles: prd
+  
+  zcms:
+    common:
+      redis-prefix: CZC_
   

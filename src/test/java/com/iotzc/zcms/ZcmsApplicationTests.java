@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.iotzc.zcms.model.User;
 import com.iotzc.zcms.redis.RedisCacheManager;
 import com.iotzc.zcms.service.UserService;
+import com.iotzc.zcms.util.UserPasswordUtil;
 
 @RunWith(SpringRunner.class)
 @MapperScan("com.iotzc.zcms.dao")
@@ -23,10 +24,11 @@ public class ZcmsApplicationTests {
     
     @Test
     public void contextLoads() {
-        User user = new User();
-        user.setPhone("123456789");
-        user.setStatus(0);
-        userSerice.saveUser(user);
+        User user = userSerice.getByUserName("18759128102");
+        UserPasswordUtil.initPassword(user);
+        System.out.println("pwd:" + user.getPassword());
+        System.out.println("salt:" + user.getSalt());
+        userSerice.updateUser(user);
     }
 
 }

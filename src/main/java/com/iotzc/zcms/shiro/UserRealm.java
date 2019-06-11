@@ -30,7 +30,6 @@ public class UserRealm extends AuthorizingRealm {
      * */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
-        System.out.println("doGetAuthorizationInfo.................");
         log.info("doGetAuthorizationInfo.................");
         return null;
     }
@@ -45,7 +44,7 @@ public class UserRealm extends AuthorizingRealm {
             return null;
         }
         String account = token.getPrincipal().toString();
-        User user = userService.getByPhone(account);
+        User user = userService.getByUserName(account);
         if (null == user) {
             throw new AccountException();
         }
@@ -53,7 +52,7 @@ public class UserRealm extends AuthorizingRealm {
             throw new AccountException(ServerCode.ACCOUNT_INVALID, "无效账号，请确认");
         }
         SimpleAuthenticationInfo authc = new SimpleAuthenticationInfo(
-                user.getPhone(), user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
+                user.getUserName(), user.getPassword(), ByteSource.Util.bytes(user.getCredentialsSalt()), getName());
         return authc;
     }
 

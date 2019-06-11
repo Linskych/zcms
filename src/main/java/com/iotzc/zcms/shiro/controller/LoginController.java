@@ -10,8 +10,17 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.ShiroException;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.ExcessiveAttemptsException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.LockedAccountException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.iotzc.zcms.util.CaptchaGenerator;
 import com.iotzc.zcms.util.Result;
@@ -26,21 +35,37 @@ public class LoginController {
     
     @RequestMapping("/login")
     public String toLoginPage() {
-        log.info("page.......");
         return "login";
     }
     
+    @RequestMapping("/home")
+    public String toHomePage() {
+        return "index";
+    }
+    
     @RequestMapping("/check")
-    public String login(HttpServletRequest request) {
-        log.info("check.....");
-        String phone = request.getParameter("phone");
+    @ResponseBody
+    public String check(HttpServletRequest request) {
+        String userName = request.getParameter("userName");
         String pwd = request.getParameter("password");
         String captcha = request.getParameter("captcha");
+        log.info(userName + "checking...");
         String sc = (String)SecurityUtils.getSubject().getSession().getAttribute(KEY_CAPTCHA);
         if (StringUtils.isEmpty(captcha) || !captcha.equalsIgnoreCase(sc)) {
             return Result.jsonFail("验证码错误");
         }
-        return "";
+        UsernamePasswordToken token = new UsernamePasswordToken(userName, pwd);
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+        } catch (UnknownAccountException | IncorrectCredentialsException e) {
+            e.printStackTrace();
+            return Result.jsonFail("用户名或密码错误");
+        } catch (ShiroException se) {
+            se.printStackTrace();
+            return Result.jsonFail("登入异常");
+        }
+        return Result.jsonSucc("登入成功");
     }
     
     @RequestMapping("/getCaptcha")

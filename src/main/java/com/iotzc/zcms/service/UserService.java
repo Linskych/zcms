@@ -4,7 +4,9 @@ import com.iotzc.zcms.model.User;
 
 public interface UserService {
 
-    User getByPhone(String phone);
+    User getByUserName(String userName);
     
-    void saveUser(User user);
+    int saveUser(User user);
+    
+    int updateUser(User user);
 }
